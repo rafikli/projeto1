@@ -15,7 +15,7 @@ while True:
     elif escolha == 1:      
         produto = str(input("Nome do produto:"))
         qnt = int(input("Digite a quantidade inicial:"))
-        if produto not in estoque.keys():
+        if produto not in estoque.keys() and qnt >= 0:
             estoque[produto]= {'quantidade':qnt}
         else:
             print("Produto já cadastrado\n")
