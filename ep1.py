@@ -1,12 +1,13 @@
 import json
-#from pprint import pprint
+from pprint import pprint
 
 arquivo_in = open("ep1.json", "r")
-#e1 = arquivo_in.read()
+json1 = arquivo_in.read()
+estoque = json.loads(json1)
+
+#estoque = {}      
 
 arquivo_out = open("ep1.json", "w")
-#estoque = dict(e1)
-#print(estoque)
 
 while True:
     print('Controle de estoque\n\n0 - sair\n1 - adicionar item\n2 - remover item\n3 - alterar item\n4 - imprimir estoque')
@@ -18,7 +19,7 @@ while True:
             break
     if escolha == 0:
         print("Até mais")
-        arquivo_out.write(str(estoque))
+        arquivo_out.write(json.dumps(estoque))
         break
     elif escolha == 1:      
         produto = str(input("Nome do produto:"))
