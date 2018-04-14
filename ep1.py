@@ -26,6 +26,10 @@ while True:
         qnt = int(input("Digite a quantidade inicial:"))
         if produto not in estoque.keys() and qnt >= 0:
             estoque[produto]= {'quantidade':qnt}
+        preco = float(input("Digite o preço unitário:"))
+        if preço > 0:
+            estoque[produto]= {'preço':preco}
+
         else:
             print("Produto já cadastrado\n")
         if qnt < 0:
