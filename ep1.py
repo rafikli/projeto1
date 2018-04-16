@@ -3,7 +3,11 @@ from pprint import pprint
 
 arquivo_in = open("ep1.json", "r")
 json1 = arquivo_in.read()
-estoque = json.loads(json1)
+
+if len(json1)==0:
+    estoque = {}
+else:
+    estoque = json.loads(json1)
 
 #estoque = {}      
 
@@ -24,16 +28,18 @@ while True:
     elif escolha == 1:      
         produto = str(input("Nome do produto:"))
         qnt = int(input("Digite a quantidade inicial:"))
-        if produto not in estoque.keys() and qnt >= 0:
+        if produto not in estoque.keys() and qnt >= 0 :
             estoque[produto]= {'quantidade':qnt}
         preco = float(input("Digite o preço unitário:"))
-        if preço > 0:
+        if preco > 0:
             estoque[produto]= {'preço':preco}
 
-        else:
+        if produto in estoque.keys():
             print("Produto já cadastrado\n")
         if qnt < 0:
             print("A quantidade inicial deve ser positiva\n")
+        if preco < 0:
+            print("O preço deve ser positivo\n")
     elif escolha == 2:
         remover = str(input("Nome do produto:"))
         if remover in estoque.keys():
