@@ -10,13 +10,13 @@ else:
     
 for k, v in estoque.items():
      if 'preco' not in v.keys():
-         estoque[k]['preco'] = 0
+         estoque[k]['preco'] = int(input("Valor do produto {0} nao definido, digite o preço:".format(k)))
 
 
 arquivo_out = open("ep1.json", "w")
 
 while True:
-    print('Controle de estoque\n\n0 - sair\n1 - adicionar item\n2 - remover item\n3 - alterar item\n4 - imprimir estoque\n5 - alterar preço\n')
+    print('Controle de estoque\n\n0 - sair\n1 - adicionar item\n2 - remover item\n3 - alterar item\n4 - alterar preço\n5 - imprimir estoque\n')
     while True:
         escolha = int(input("Faça sua escolha:"))
         if escolha not in range(6):
@@ -53,9 +53,9 @@ while True:
         alteracao = int(input("Quantidade:"))
         if alterar in estoque.keys():
             estoque[alterar]['quantidade']+=alteracao
-    elif escolha == 4:
-        print(json.dumps(estoque, sort_keys=True, indent=4))
     elif escolha == 5:
+        print(json.dumps(estoque, sort_keys=True, indent=4))
+    elif escolha == 4:
         alterar = str(input("Digite o produto:"))
         novo_preco = float(input("Novo preco:"))
         if alterar in estoque.keys() and novo_preco > 0:
