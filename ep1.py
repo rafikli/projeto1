@@ -1,5 +1,6 @@
 import json
-
+# Listar os produtos com quantidade de estoque negativa.
+# Imprimir o valor monetário total em estoque.
 arquivo_in = open("ep1.json", "r")
 json1 = arquivo_in.read()
 
@@ -16,7 +17,7 @@ for k, v in estoque.items():
 arquivo_out = open("ep1.json", "w")
 
 while True:
-    print('Controle de estoque\n\n0 - sair\n1 - adicionar item\n2 - remover item\n3 - alterar item\n4 - alterar preço\n5 - imprimir estoque\n')
+    print('Controle de estoque\n\n0 - sair\n1 - adicionar item\n2 - remover item\n3 - alterar item\n4 - alterar preço\n5 - informações sobre estoque\n')
     while True:
         escolha = int(input("Faça sua escolha:"))
         if escolha not in range(6):
@@ -48,13 +49,33 @@ while True:
             del(estoque[remover])
         else: 
             print("Produto nao encontrado\n")
+
     elif escolha == 3:
         alterar = str(input("Digite o produto:"))
         alteracao = int(input("Quantidade:"))
         if alterar in estoque.keys():
             estoque[alterar]['quantidade']+=alteracao
+
     elif escolha == 5:
-        print(json.dumps(estoque, sort_keys=True, indent=4))
+        try:
+            print('Informações do estoque \n\n0 - sair\n1 - imprimir estoque\n2 - imprimir estoque negativo\n3 - imprimir valor monetario no estoque')
+            sub_escolha = int(input("Digite um numero:"))
+            if sub_escolha == 1:
+                print(json.dumps(estoque, sort_keys=True, indent=4))
+            
+            elif sub_escolha == 2:
+                for k,v in estoque.items():
+                    for c in v.values():
+                        if c < 0:
+                            print("O produto {} esta com etoque negativo de {} unidades".format(k,c))
+
+            elif sub_escolha == 3:
+                total = 0
+                for k in estoque.keys():
+                    total += estoque[k]['preco']*estoque[k]['quantidade']
+                print("Valor monetario total é de R${}".format(total))
+        except:
+            print("\nEscolha invalida\n")
     elif escolha == 4:
         alterar = str(input("Digite o produto:"))
         novo_preco = float(input("Novo preco:"))
