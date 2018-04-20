@@ -38,7 +38,7 @@ while True:
             del(estoques[deletar_loja])#add sub estrutura
             print('\nA loja {} foi removida\n'.format(deletar_loja))
         else:
-            print("Loja nao encontrada")
+            print("\nLoja nao encontrada")
             
     if escolha_1 not in range(4):
         print("Escolha inválida")
@@ -64,10 +64,10 @@ if escolha_1 == 2:
     print("\nBem vindo à loja {}\n".format(nova_loja))
 
 while True:
-    print('Controle de estoque\n\n0 - sair\n1 - modificar estrutura de lojas\n2 - adicionar item\n3 - remover item\n4 - alterar item\n5 - alterar preço\n6 - informações sobre estoque\n')
+    print('Controle de estoque\n\n0 - sair\n1 - adicionar item\n2 - remover item\n3 - alterar item\n4 - alterar preço\n5 - informações sobre estoque\n')
     while True:
         escolha = int(input("Faça sua escolha:"))
-        if escolha not in range(7):
+        if escolha not in range(6):
             print("Escolha nao definida")
         else:
             break
@@ -75,25 +75,8 @@ while True:
         print("Até mais")
         arquivo_out.write(json.dumps(estoques))#add sub estrutura
         break
-    elif escolha == 1:
-        try:
-            print('Controle de loja\n\n0 - sair\n1 - adicionar nova loja\n2 - remover loja\n3 - trocar de loja\n')
-            sub_escolha_loja = int(input('Faça sua escolha'))
-            if sub_escolha_loja == 1:
-                loja = str(input("Nome da loja:"))
-                #adicionar dicionario loja
-                print(loja)
-            if sub_escolha_loja == 2:
-                loja = str(input("Nome da loja:"))
-                #remover dicionrio da loja
-                #tem certeza? y/n
-                    
-        except:
-            print("\nEscolha invalida\n")
-
-
     
-    elif escolha == 2:  
+    elif escolha == 1:  
         try:    
             produto = str(input("Nome do produto:"))
             qnt = int(input("Digite a quantidade inicial:"))
@@ -112,7 +95,7 @@ while True:
         except:
             print("\nEscolha invalida\n") 
 
-    elif escolha == 3:
+    elif escolha == 2:
         try:
             remover = str(input("Nome do produto:"))
             if remover in estoque.keys():#add sub estrutura
@@ -122,16 +105,18 @@ while True:
                 print("Produto nao encontrado\n")
         except:
             print("\nEscolha invalida\n")
-    elif escolha == 4:
+    elif escolha == 3:
         try:
             alterar = str(input("Digite o produto:"))
             alteracao = int(input("Quantidade:"))
             if alterar in estoque.keys():#add sub estrutura
                 estoque[alterar]['quantidade'] += alteracao#add sub estrutura
                 print('\nA nova quantidade de {} é {} unidades\n'.format(alterar,(alteracao+estoque[alterar]['quantidade'])))
+            else:
+                print("\nProduto nao encontrado\n")
         except:
             print("\nEscolha invalida\n")
-    elif escolha == 6:
+    elif escolha == 5:
         try:
             print('Informações do estoque \n\n0 - sair\n1 - imprimir estoque\n2 - imprimir estoque negativo\n3 - imprimir valor monetario no estoque')
             sub_escolha = int(input("Digite um numero:"))
@@ -151,7 +136,7 @@ while True:
                 print("\nValor monetario total é de R${}\n".format(total))
         except:
             print("\nEscolha invalida\n")
-    elif escolha == 5:
+    elif escolha == 4:
         try:
             alterar = str(input("Digite o produto:"))
             novo_preco = float(input("Novo preco:"))
