@@ -4,16 +4,64 @@ arquivo_in = open("ep1.json", "r")
 json1 = arquivo_in.read()
 
 if len(json1) == 0:
-    estoque = {}#add sub estrutura
+    estoques = {}#add sub estrutura
+    print("Sem lojas disponíveis\n")
 else:
-    estoque = json.loads(json1)#add sub estrutura
+    estoques = json.loads(json1)#add sub estrutura
+    print("Lojas disponíveis:\n")   
+    for e in estoques.keys():
+        print(e)
     
+while True:
+    print("\n1 - Escolher uma loja\n2 - Criar nova loja\n3 - Deletar loja")
+    escolha_1 = int(input("Digite a sua escolha:"))
+    if escolha_1 == 1:
+        loja = str(input("Digite o nome da loja:"))
+        if loja in estoques.keys():
+            estoque = estoques[loja]
+            break
+        else:
+            print("Loja nao encontrada\n")
+            
+    if escolha_1 == 2:
+        nova_loja = str(input("Digite o nome da nova loja:\n"))
+        if nova_loja not in estoques.keys():
+            estoques[nova_loja] = {}
+            estoque = estoques[nova_loja]
+            break
+        else:
+            print("Loja já existente\n")
+    
+    if escolha_1 == 3:
+        deletar_loja = str(input("Digite a loja que deseja deletar:"))
+        if deletar_loja in estoques.keys():
+            del(estoques[deletar_loja])#add sub estrutura
+            print('\nA loja {} foi removida\n'.format(deletar_loja))
+        else:
+            print("Loja nao encontrada")
+            
+    if escolha_1 not in range(4):
+        print("Escolha inválida")
+            
+    if len(estoques) == 0:
+            estoques = {}#add sub estrutura
+            print("Sem lojas disponíveis\n")
+    else:
+        print("Lojas disponíveis:\n")   
+        for e in estoques.keys():
+            print(e)
+        
 for k, v in estoque.items():#add sub estrutura
      if 'preco' not in v.keys():#add sub estrutura
          estoque[k]['preco'] = int(input("Valor do produto {0} nao definido, digite o preço:".format(k)))#add sub estrutura
 
 
 arquivo_out = open("ep1.json", "w")
+
+if escolha_1 == 1:
+    print("\nBem vindo à loja {}\n".format(loja))
+if escolha_1 == 2:
+    print("\nBem vindo à loja {}\n".format(nova_loja))
 
 while True:
     print('Controle de estoque\n\n0 - sair\n1 - modificar estrutura de lojas\n2 - adicionar item\n3 - remover item\n4 - alterar item\n5 - alterar preço\n6 - informações sobre estoque\n')
@@ -25,11 +73,11 @@ while True:
             break
     if escolha == 0:
         print("Até mais")
-        arquivo_out.write(json.dumps(estoque))#add sub estrutura
+        arquivo_out.write(json.dumps(estoques))#add sub estrutura
         break
     elif escolha == 1:
         try:
-            print('Controle de loja\n\n0 - sair\n1 - adicionar nova loja\n2 - remover loja\n3 - remover item\n')
+            print('Controle de loja\n\n0 - sair\n1 - adicionar nova loja\n2 - remover loja\n3 - trocar de loja\n')
             sub_escolha_loja = int(input('Faça sua escolha'))
             if sub_escolha_loja == 1:
                 loja = str(input("Nome da loja:"))
