@@ -121,8 +121,12 @@ while True:
             print('Informações do estoque \n\n0 - sair\n1 - imprimir estoque\n2 - imprimir estoque negativo\n3 - imprimir valor monetario no estoque')
             sub_escolha = int(input("Digite um numero:"))
             if sub_escolha == 1:
-                print(json.dumps(estoque, sort_keys=True, indent=4))#add sub estrutura
-            
+                for x in estoque:
+                    print("\n")
+                    print (x)
+                    for y in estoque[x]:
+                        print (y,':',estoque[x][y])
+                print("\n")
             elif sub_escolha == 2:
                 for k,v in estoque.items():#add sub estrutura
                     for c in v.values():#add sub estrutura
