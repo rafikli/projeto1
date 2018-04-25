@@ -1,41 +1,41 @@
-import json
+import json  
 
-arquivo_in = open("ep1.json", "r")
-json1 = arquivo_in.read()
+arquivo_in = open("ep1.json", "r") # abrindo arquivo no modo read
+json1 = arquivo_in.read() #
 
-if len(json1) == 0:
-    estoques = {}#add sub estrutura
+if len(json1) == 0: # se o arquivo estiver vazio
+    estoques = {}#adicionar um dicionario vazio
     print("Sem lojas disponíveis\n")
 else:
-    estoques = json.loads(json1)#add sub estrutura
+    estoques = json.loads(json1)#copiando os valores do arquivo jason para um dicionario    
     print("Lojas disponíveis:\n")   
-    for e in estoques.keys():
+    for e in estoques.keys(): #mostrar as lojas disponiveis na tela
         print(e)
     
 while True:
-    print("\n1 - Escolher uma loja\n2 - Criar nova loja\n3 - Deletar loja")
+    print("\n1 - Escolher uma loja\n2 - Criar nova loja\n3 - Deletar loja") #mostrar menu para adicionar, remover e alterar loja
     escolha_1 = int(input("Digite a sua escolha:"))
     if escolha_1 == 1:
         loja = str(input("Digite o nome da loja:"))
-        if loja in estoques.keys():
-            estoque = estoques[loja]
+        if loja in estoques.keys():               #se a loja esta no dicionario
+            estoque = estoques[loja]              # estoque recebe a loja
             break
         else:
             print("Loja nao encontrada\n")
             
     if escolha_1 == 2:
         nova_loja = str(input("Digite o nome da nova loja:\n"))
-        if nova_loja not in estoques.keys():
-            estoques[nova_loja] = {}
-            estoque = estoques[nova_loja]
+        if nova_loja not in estoques.keys():    #se a loja nao existe no dicionario
+            estoques[nova_loja] = {}            #cria um nova loja
+            estoque = estoques[nova_loja]       #estoque recebe nova loja
             break
         else:
             print("Loja já existente\n")
     
     if escolha_1 == 3:
         deletar_loja = str(input("Digite a loja que deseja deletar:"))
-        if deletar_loja in estoques.keys():
-            del(estoques[deletar_loja])#add sub estrutura
+        if deletar_loja in estoques.keys():                             #verifica se a loja a ser deletada esta no dicionario
+            del(estoques[deletar_loja])                                 #deleta a loja
             print('\nA loja {} foi removida\n'.format(deletar_loja))
         else:
             print("\nLoja nao encontrada")
@@ -43,20 +43,20 @@ while True:
     if escolha_1 not in range(4):
         print("Escolha inválida")
             
-    if len(estoques) == 0:
-            estoques = {}#add sub estrutura
+    if len(estoques) == 0:                  #se o estoque esta vazio 
+            estoques = {}                   #adiciona dicionario vazio ao estoque
             print("Sem lojas disponíveis\n")
     else:
         print("Lojas disponíveis:\n")   
         for e in estoques.keys():
             print(e)
         
-for k, v in estoque.items():#add sub estrutura
-     if 'preco' not in v.keys():#add sub estrutura
+for k, v in estoque.items():
+     if 'preco' not in v.keys():# verifica se o produto no estoque tem um preço
          estoque[k]['preco'] = int(input("Valor do produto {0} nao definido, digite o preço:".format(k)))#add sub estrutura
 
 
-arquivo_out = open("ep1.json", "w")
+arquivo_out = open("ep1.json", "w") # abre o arquivo json para gravar
 
 if escolha_1 == 1:
     print("\nBem vindo à loja {}\n".format(loja))
@@ -64,7 +64,7 @@ if escolha_1 == 2:
     print("\nBem vindo à loja {}\n".format(nova_loja))
 
 while True:
-    print('Controle de estoque\n\n0 - sair\n1 - adicionar item\n2 - remover item\n3 - alterar item\n4 - alterar preço\n5 - informações sobre estoque\n')
+    print('Controle de estoque\n\n0 - sair\n1 - adicionar item\n2 - remover item\n3 - alterar item\n4 - alterar preço\n5 - informações sobre estoque\n')  #mostra o menu para altera estoque
     while True:
         escolha = int(input("Faça sua escolha:"))
         if escolha not in range(6):
@@ -73,7 +73,7 @@ while True:
             break
     if escolha == 0:
         print("Até mais")
-        arquivo_out.write(json.dumps(estoques))#add sub estrutura
+        arquivo_out.write(json.dumps(estoques))#grava no arquivo json se o usuario sair do programa
         break
     
     elif escolha == 1:  
@@ -81,8 +81,8 @@ while True:
             produto = str(input("Nome do produto:"))
             qnt = int(input("Digite a quantidade inicial:"))
             preco = float(input('Digite o valor unitário do produto:'))
-            if produto not in estoque.keys() and qnt >= 0 and preco > 0:#add sub estrutura
-                estoque[produto]= {'quantidade':qnt, 'preco': preco} #add sub estrutura
+            if produto not in estoque.keys() and qnt >= 0 and preco > 0:
+                estoque[produto]= {'quantidade':qnt, 'preco': preco} #adiciona o produto, quantidade e preço no estoque
                 print('\n{} unidades de {} foram adicionadas ao estoque com preço unitario de R${}\n'.format(qnt,produto,preco))
             else:
                 if produto in estoque.keys():#add sub estrutura
@@ -98,8 +98,8 @@ while True:
     elif escolha == 2:
         try:
             remover = str(input("Nome do produto:"))
-            if remover in estoque.keys():#add sub estrutura
-                del(estoque[remover])#add sub estrutura
+            if remover in estoque.keys():
+                del(estoque[remover])                           #deleta um produto da loja
                 print('\n{} foi removido do estoque\n'.format(remover))
             else: 
                 print("Produto nao encontrado\n")
@@ -110,7 +110,7 @@ while True:
             alterar = str(input("Digite o produto:"))
             alteracao = int(input("Quantidade:"))
             if alterar in estoque.keys():#add sub estrutura
-                estoque[alterar]['quantidade'] += alteracao#add sub estrutura
+                estoque[alterar]['quantidade'] += alteracao         #altera quantidade de um produto
                 print('\nA nova quantidade de {} é {} unidades\n'.format(alterar,(alteracao+estoque[alterar]['quantidade'])))
             else:
                 print("\nProduto nao encontrado\n")
@@ -118,36 +118,34 @@ while True:
             print("\nEscolha invalida\n")
     elif escolha == 5:
         try:
-            print('Informações do estoque \n\n0 - sair\n1 - imprimir estoque\n2 - imprimir estoque negativo\n3 - imprimir valor monetario no estoque')
+            print('Informações do estoque \n\n0 - sair\n1 - imprimir estoque\n2 - imprimir estoque negativo\n3 - imprimir valor monetario no estoque') #mostra menu de informaçoes do estoque
             sub_escolha = int(input("Digite um numero:"))
             if sub_escolha == 1:
                 for x in estoque:
                     print("\n")
                     print (x)
-                    for y in estoque[x]:
-                        print (y,':',estoque[x][y])
+                    for y in estoque[x]: 
+                        print (y,':',estoque[x][y]) #imprime o estoque
                 print("\n")
             elif sub_escolha == 2:
-                for k,v in estoque.items():#add sub estrutura
-                    for c in v.values():#add sub estrutura
-                        if c < 0:#add sub estrutura
-                            print("\nO produto {} esta com etoque negativo de {} unidades\n".format(k,c))
+                for k,v in estoque.items():
+                    for c in v.values():#
+                        if c < 0:
+                            print("\nO produto {} esta com etoque negativo de {} unidades\n".format(k,c))#imprime os valores negativos
 
             elif sub_escolha == 3:
                 total = 0
-                for k in estoque.keys():#add sub estrutura
-                    total += estoque[k]['preco']*estoque[k]['quantidade']#add sub estrutura
-                print("\nValor monetario total é de R${}\n".format(total))
+                for k in estoque.keys():#
+                    total += estoque[k]['preco']*estoque[k]['quantidade']   #calcula o valor monetario total
+                print("\nValor monetario total é de R${}\n".format(total)) #imprime o valro monetario total
         except:
             print("\nEscolha invalida\n")
     elif escolha == 4:
         try:
             alterar = str(input("Digite o produto:"))
             novo_preco = float(input("Novo preco:"))
-            if alterar in estoque.keys() and novo_preco > 0:#add sub estrutura
-                
-                
-                estoque[alterar]['preco'] = novo_preco#add sub estrutura
+            if alterar in estoque.keys() and novo_preco > 0:
+                estoque[alterar]['preco'] = novo_preco              #altera o preço do produto
                 print('\nO novo preço de {} é R${}\n'.format(alterar,novo_preco))
             else:
                 if alterar not in estoque.keys():#add sub estrutura
@@ -158,5 +156,5 @@ while True:
             print("\nEscolha invalida\n")
   
 
-arquivo_in.close()
-arquivo_out.close()
+arquivo_in.close() 
+arquivo_out.close() #fecha o arquivo
